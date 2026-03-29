@@ -31,7 +31,7 @@ function NavBar() {
     },
   ];
   return (
-    <nav className="h-20 bg-gray-100 border-b ">
+    <nav className="h-20 ">
 
         <ModeToggle />
       <DropdownMenu>

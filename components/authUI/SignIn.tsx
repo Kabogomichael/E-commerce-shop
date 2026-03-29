@@ -57,8 +57,8 @@ function CreateAccount() {
     // router.push("/");
   };
   return (
-    <div className=" min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+    <div className=" min-h-screen flex items-center justify-center ">
+      <div className="p-8 rounded-2xl shadow-md w-full max-w-md border dark:bg-chart-4">
         <h1 className="text-center text-2xl mb-6 font-bold capitalize">
           {" "}
           create account

@@ -46,7 +46,7 @@ const [email, setEmail] = useState("")
   return (
     <div className='  min-h-screen flex items-center justify-center'>
 
-        <div className='dark:bg-muted p-8 rounded-2xl shadow-md w-full max-w-md '>
+        <div className='dark:bg-accent p-8 rounded-2xl shadow-md w-full max-w-md '>
         <h1 className='text-center text-2xl mb-6 font-bold'> LogIn</h1>
         <form className='space-y-4 w-full ' onSubmit={(e)=> handleSubmit(e)}>
             <div>
@@ -62,7 +62,7 @@ const [email, setEmail] = useState("")
             <Label> Password</Label>
             <Input type='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='password' className='w-full mt-2' />
             </div>
-            <Button type='submit' className='w-full cursor-pointer'>LogIn</Button>
+            <Button type='submit' variant={"default"} className='w-full cursor-pointer bg-primary'>LogIn</Button>
             <p className='text-sm '> Don't have an account?
             <Link href={'/signIn'} className='underline text-blue-600 ml-1' >
             Create account
