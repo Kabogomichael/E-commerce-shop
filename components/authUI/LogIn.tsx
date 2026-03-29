@@ -44,9 +44,9 @@ const [email, setEmail] = useState("")
 
     }
   return (
-    <div className='  min-h-screen flex items-center justify-center bg-gray-100'>
+    <div className='  min-h-screen flex items-center justify-center'>
 
-        <div className='dark:bg-background p-8 rounded-2xl shadow-md w-full max-w-md '>
+        <div className='dark:bg-muted p-8 rounded-2xl shadow-md w-full max-w-md '>
         <h1 className='text-center text-2xl mb-6 font-bold'> LogIn</h1>
         <form className='space-y-4 w-full ' onSubmit={(e)=> handleSubmit(e)}>
             <div>
