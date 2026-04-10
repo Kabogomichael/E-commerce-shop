@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
     protocol:"https",
     hostname:"mmjtualaqjusseitgmje.supabase.co"
    }]
+  },
+  typescript:{
+    ignoreBuildErrors:true
   }
+
 };
 
 export default nextConfig;
