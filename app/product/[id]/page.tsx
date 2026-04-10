@@ -11,7 +11,7 @@ import {
   Carousel,
 } from "../../../components/ui/carousel";
 import { toast } from "sonner";
-import Products, { Items } from "@/components/Products";
+import  { Items } from "@/components/Products";
 import { useCart } from "@/context/CartProvider";
 
 // export interface Items{
@@ -21,7 +21,7 @@ import { useCart } from "@/context/CartProvider";
 //     main_image:string
 //     images:string[]
 // }
-function ProductId({ params }: { params: { id: string } }) {
+function ProductId({ id }: { id: string  }) {
   const [product, setProduct] = useState<Items|null>(null)
   const cart = useCart()
   useEffect(()=>{
@@ -29,7 +29,7 @@ function ProductId({ params }: { params: { id: string } }) {
  const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("id",params.id)
+    .eq("id", id)
     .single();
   if (error) {
     toast.error(error.message)
