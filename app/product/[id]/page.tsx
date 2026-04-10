@@ -21,15 +21,16 @@ import { useCart } from "@/context/CartProvider";
 //     main_image:string
 //     images:string[]
 // }
-function ProductId({ id }: { id: string  }) {
+function ProductId({params}: {params:Promise<{id: string }>} ) {
   const [product, setProduct] = useState<Items|null>(null)
   const cart = useCart()
+  
   useEffect(()=>{
     const fetchProduct = async()=>{
  const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("id", id)
+    .eq("id",params.id)
     .single();
   if (error) {
     toast.error(error.message)
@@ -40,7 +41,7 @@ function ProductId({ id }: { id: string  }) {
 
   },[])
 
-  
+if (!product) return (<h1>Loading product...</h1>)
   const addItem = (product:Items) => {
     // toast("add button under maintenance");
     const products = cart?.addToCart(product)
