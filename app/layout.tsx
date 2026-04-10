@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import NavBar from "@/components/navigation/NavBar";
 import AuthProvider from "@/components/AuthProvider";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import CartProvider from "@/context/CartProvider";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -30,17 +31,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en"  suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} `}
+      > <CartProvider>
         <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem disableTransitionOnChange>
         <AuthProvider>
         <NavBar />
         {children}
         <Toaster />
+        
         </AuthProvider>
         </ThemeProvider>
+        </CartProvider>
       </body>
     </html>
   );

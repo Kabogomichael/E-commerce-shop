@@ -30,10 +30,12 @@ function CreateAccount() {
     }
 
     const {data,error,} = await supabase.auth.signUp({ email, password ,options:{data:{
-      full_name:fullName
+      full_name:fullName,
+      avatar_url:"https://i.pravatar.cc/150?u=" + email
     }}});
     if (data.session) {
-      router.push("/dashboard")
+      router.refresh()
+      router.push("/")
     }
     if (data.user) {
      const{error} = await supabase.from("users").insert([
@@ -46,24 +48,25 @@ function CreateAccount() {
         },
       ]);
       if (error) {
-        toast(error.message)
+        toast.error(error.message)
       }
     }
     if (error) {
-      toast(error.message);
+      toast.error(error.message);
+    }else{
+     toast.success("Account created ",{position:"top-right"})
     }
-    //  toast("Account created ",{position:"top-right"})
-    toast("signUp successful", { position: "top-left" });
+    // toast.success("signUp successful");
     // router.push("/");
   };
   return (
-    <div className=" min-h-screen flex items-center justify-center ">
-      <div className="p-8 rounded-2xl shadow-md w-full max-w-md border dark:bg-chart-4">
+    <div className=" min-h-screen flex items-center justify-center mx-2 md:mx-0 ">
+      <div className="p-8 rounded-2xl shadow-md w-full max-w-md border ">
         <h1 className="text-center text-2xl mb-6 font-bold capitalize">
           {" "}
           create account
         </h1>
-        <form className="space-y-4 w-full " onSubmit={(e) => handleSubmit(e)}>
+        <form className="space-y-6 w-full " onSubmit={(e) => handleSubmit(e)}>
           <div>
             <Label>Full name</Label>
             <Input
@@ -119,7 +122,7 @@ function CreateAccount() {
             {" "}
             I already have an account?
             <Link href={"/logIn"} className="underline text-blue-600 ml-1">
-              login
+              Login
             </Link>
           </p>
         </form>

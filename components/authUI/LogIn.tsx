@@ -21,7 +21,7 @@ const [email, setEmail] = useState("")
         
           const {data,error} = await supabase.auth.signInWithPassword({email,password})
           if (error) {
-            toast(error.message)
+            toast.error(error.message)
             return;
             
           }
@@ -34,7 +34,8 @@ const [email, setEmail] = useState("")
               is_active:true,
               last_seen: new Date()
             }).eq("id",data.user.id)
-          router.push("/dashboard")
+            router.refresh()
+          router.push("/")
           }
 
           
@@ -44,9 +45,9 @@ const [email, setEmail] = useState("")
 
     }
   return (
-    <div className='  min-h-screen flex items-center justify-center'>
+    <div className='  min-h-screen flex items-center justify-center mx-2 md:mx-0'>
 
-        <div className='dark:bg-accent p-8 rounded-2xl shadow-md w-full max-w-md '>
+        <div className=' border p-8 rounded-2xl shadow-md w-full max-w-md '>
         <h1 className='text-center text-2xl mb-6 font-bold'> LogIn</h1>
         <form className='space-y-4 w-full ' onSubmit={(e)=> handleSubmit(e)}>
             <div>
