@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Items } from "./Products";
 import Image from "next/image";
@@ -10,12 +10,16 @@ interface CartPage {
 
 function CartPage({ setOpenCart, carts }: CartPage) {
     const [cartItems, setCartItems] = useState(1)
-    const IncreaseCart =()=>{
+    
+      const IncreaseCart =()=>{
         setCartItems(cartItems + 1)
     }
     const DecreaseCart =()=>{
         setCartItems(cartItems - 1)
     }
+    
+  
+    
   return (
     <div className="absolute z-50  bg-black/50 transition-colors  w-full h-full top-0">
       <div className="flex justify-end">
@@ -34,7 +38,7 @@ function CartPage({ setOpenCart, carts }: CartPage) {
           ) : (
             <div>
               {carts.map((cart) => (
-                <div key={cart.id} className={`flex items-center `}>
+                <div key={cart.id} className={`flex items-center justify-between mr-10 `}>
                   <Image
                     src={cart.main_image}
                     alt={cart.name}
@@ -45,9 +49,16 @@ function CartPage({ setOpenCart, carts }: CartPage) {
                     <p>{cart.price}</p>
                   <div className="flex items-center ml-4 gap-4">
                     <Button onClick={DecreaseCart}>-</Button>
-                  <h1>{cartItems}</h1>
+                  <h1 className="text-2xl">{cartItems}</h1>
                     <Button onClick={IncreaseCart}>+</Button>
                   </div>
+                  
+                    <div className="flex gap-2 items-center ">
+                    <h1 className="font-bold text-xl">Total</h1>
+                    <p>$ 0</p>
+                  </div>
+                  
+                  
                 </div>
               ))}
             </div>

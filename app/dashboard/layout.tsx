@@ -7,11 +7,12 @@ export default function DashBoardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <div className="flex  md:flex-row flex-col overflow-scroll">
       <DashBoardNav />
-      <main className=" min-h-screen w-full  pt-10 border-l md:pl-10">{children}</main>
+      <main className=" min-h-screen w-full  pt-10 border-l md:pl-10">
+        {children}
+      </main>
     </div>
   );
 }

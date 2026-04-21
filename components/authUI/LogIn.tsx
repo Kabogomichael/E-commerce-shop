@@ -27,15 +27,16 @@ const [email, setEmail] = useState("")
           }
           
           if(data.user){
-            toast.success("Successful  Logged In :)",{position:"top-right"})
+            toast.success("Successful  Logged In ❎")
             // update user activity
 
             await supabase.from("users").update({
               is_active:true,
               last_seen: new Date()
             }).eq("id",data.user.id)
-            router.refresh()
+            
           router.push("/")
+          router.refresh()
           }
 
           

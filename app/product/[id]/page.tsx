@@ -13,6 +13,7 @@ import {
 import { toast } from "sonner";
 import  { Items } from "@/components/Products";
 import { useCart } from "@/context/CartProvider";
+import { useRouter } from "next/navigation";
 
 // export interface Items{
 //     id:string,
@@ -23,29 +24,41 @@ import { useCart } from "@/context/CartProvider";
 // }
 function ProductId({params}: {params:Promise<{id: string }>} ) {
   const [product, setProduct] = useState<Items|null>(null)
+  const [isLoading, setIsLoading] = useState(false)
   const cart = useCart()
+  const router = useRouter()
   
   useEffect(()=>{
     const fetchProduct = async()=>{
  const { data, error } = await supabase
     .from("products")
     .select("*")
-    .eq("id",params.id)
+    .eq("id",(await params).id)
     .single();
   if (error) {
     toast.error(error.message)
   }
+
+  setIsLoading(true)
   setProduct(data)
     }
+    setIsLoading(false)
    fetchProduct()
 
   },[])
 
-if (!product) return (<h1>Loading product...</h1>)
-  const addItem = (product:Items) => {
+if (!isLoading) return (<h1>Loading product...</h1>)
+  const addItem = async(product:Items) => {
+    const {data:{user}} = await supabase.auth.getUser()
+    if (!user) {
+      toast("❌ Your must logged in to add cart ")
+      router.push("/logIn")
+      return
+      
+    }
     // toast("add button under maintenance");
     const products = cart?.addToCart(product)
-    toast.success("item added")
+    toast.success("❎ item added ")
     return products
   };
   // const image = product.map((img)=> img.images)
@@ -147,7 +160,8 @@ if (!product) return (<h1>Loading product...</h1>)
             60% combed ringspun cotton/40% polyester jersey tee.
           </p>
           <Button variant={"default"} className="  capitalize w-full" onClick={()=>  product && addItem(product)}>
-            Add to cart
+            add to cart
+            {/* {isLoadi ? (<h1>Add to cart</h1>) : (<h1>cart added</h1>)} */}
           </Button>
         </div>
       </div>

@@ -52,9 +52,10 @@ function CreateAccount() {
       }
     }
     if (error) {
-      toast.error(error.message);
+      toast.error(`${error.message} ❌`);
     }else{
-     toast.success("Account created ",{position:"top-right"})
+     toast.success("Account created ❎ ",)
+     router.refresh()
     }
     // toast.success("signUp successful");
     // router.push("/");
